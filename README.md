@@ -1,11 +1,12 @@
 # Across-Modalities
 
 
-Reproducing the source code of the article: (A common representation of time across visual and auditory modalities)[https://doi.org/10.1016/j.neuropsychologia.2018.08.014]
+Reproducing the source code of the article: [A common representation of time across visual and auditory modalities](https://doi.org/10.1016/j.neuropsychologia.2018.08.014).
+
+The contributions of this work are to reproduce the work, besides proposing improvements in the decoding process.
 
 
-> The contributions of this work are to reproduce the work, besides proposing improvements in the decoding process.
-
+> 
 ## Abstract
 
 > 
@@ -16,6 +17,9 @@ Reproducing the source code of the article: (A common representation of time acr
 
 ## Project Organization
 --------------------
+
+The structure of this project follows the [Cookiecutter](https://github.com/mkrapp/cookiecutter-reproducible-science) for reprodubility template.
+
     .
     ├── LICENSE
     ├── README.md
