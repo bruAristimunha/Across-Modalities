@@ -7,7 +7,9 @@ The contributions of this work are to reproduce the work, besides proposing impr
 
 
 > 
+
 ## Abstract
+
 
 > 
 
@@ -48,6 +50,17 @@ In the development of this code was tested exclusively on Python 3, so we do not
 
 - Python >= 3.5
 - TO-DO
+
+
+## Installing the dependencies
+Install virtualenv and creating a new virtual environment:
+
+    pip install virtualenv
+    virtualenv -p /usr/bin/python ./venv
+
+Install dependencies
+
+    pip install -r config/requirements.txt
 
 
 
