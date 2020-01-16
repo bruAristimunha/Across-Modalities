@@ -6,14 +6,14 @@ import pandas as pd
 from mne import create_info, EpochsArray
 
 def makeMNE(file_name)-> mne.epochs.EpochsArray:
-    trial     = lambda df : df['ft_data_auditory'].trial.reshape((240, 64, 539)) #n_epochs, n_channels, n_times
+    trial     = lambda df : df['ft_data_auditory'].trial.T.T 
+    #n_epochs, n_channels, n_times
     ch_names  = lambda df : df['ft_data_auditory'].label
     badtrials = lambda df : df['ft_data_auditory'].badtrials
     time      = lambda df : df['ft_data_auditory'].time
     baseline     = lambda df : df['ft_data_auditory'].cfg.baseline
+    
     import warnings
-    
-    
     warnings.filterwarnings("ignore")
     
     
@@ -29,10 +29,16 @@ def makeMNE(file_name)-> mne.epochs.EpochsArray:
     
     base = tuple(baseline (file))
     tmin = min(time (file))
+    
 
-    epochs =  EpochsArray(data,info,tmin=tmin,baseline=base,proj=True,verbose=False)
+    epochs =  EpochsArray(data     = data,
+                          info     = info,
+                          tmin     = tmin,
+                          baseline = base,
+                              proj = True,
+                          verbose  = False)
     
     epochs.set_montage(mne.channels.read_montage(kind='biosemi64'))
 
-    
+
     return epochs
