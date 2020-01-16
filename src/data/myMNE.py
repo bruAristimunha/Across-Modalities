@@ -30,7 +30,7 @@ def makeMNE(file_name)-> mne.epochs.EpochsArray:
     base = tuple(baseline (file))
     tmin = min(time (file))
 
-    epochs =  EpochsArray(data,info,tmin=tmin,baseline=base,proj=True)
+    epochs =  EpochsArray(data,info,tmin=tmin,baseline=base,proj=True,verbose=False)
     
     epochs.set_montage(mne.channels.read_montage(kind='biosemi64'))
 
