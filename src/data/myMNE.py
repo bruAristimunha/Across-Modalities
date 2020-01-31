@@ -5,8 +5,9 @@ import matplotlib.pylab as plt
 import pandas as pd
 from mne import create_info, EpochsArray
 
-def makeMNE(file_name)-> mne.epochs.EpochsArray:
-    trial     = lambda df : df['ft_data_auditory'].trial.T.T 
+def makeMNE(file_name: str) -> mne.epochs.EpochsArray:
+    
+    trial     = lambda df : df['ft_data_auditory'].trial
     #n_epochs, n_channels, n_times
     ch_names  = lambda df : df['ft_data_auditory'].label
     badtrials = lambda df : df['ft_data_auditory'].badtrials
@@ -42,3 +43,4 @@ def makeMNE(file_name)-> mne.epochs.EpochsArray:
 
 
     return epochs
+
