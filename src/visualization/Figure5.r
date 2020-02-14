@@ -1,6 +1,7 @@
+#install.packages("tidyverse")
 library(Rmisc)
 library(ggplot2)
-
+library(dplyr)
 args = commandArgs(trailingOnly=TRUE) 
 
 
@@ -19,7 +20,9 @@ setwd("~/Project_n/Across-Modalities/data/processed/")
 
 df <- read.csv(file = args[1])
 
-tgc <- summarySE(df, measurevar="Predicted.Bin", groupvars=c("Real.Bin","Modality","Exposures"))
+tgc <- df %>% 
+  group_by(Real.Bin,Modality,Exposures) %>%
+  summarise(median = median(Predicted.Bin), percentil25 = quantile(Predicted.Bin, 0.25), percentil75 = quantile(Predicted.Bin, 0.75))
 
 p<- ggplot(tgc, aes(x=Real.Bin, y=Predicted.Bin, group=Exposures, color=Modality)) +   
      facet_wrap(c("Exposures","Modality")) +
@@ -28,7 +31,7 @@ p<- ggplot(tgc, aes(x=Real.Bin, y=Predicted.Bin, group=Exposures, color=Modality
      geom_line() +
      geom_point()+
      theme_classic()+
-     geom_errorbar(aes(ymin=Predicted.Bin-sd, ymax=Predicted.Bin+sd), width=.2, position=position_dodge(0.05))
+     geom_errorbar(aes(ymin=percentil25, ymax=percentil75), width=.2, position=position_dodge(0.05))
 
 p <- p + geom_point(data=df,aes(x=Real.Bin, y=Predicted.Bin, group=Exposures, color=Modality) ) + facet_wrap(c("Exposures","Modality")) 
 
