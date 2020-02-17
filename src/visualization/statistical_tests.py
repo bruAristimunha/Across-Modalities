@@ -2,7 +2,7 @@ from pandas import DataFrame
 from seaborn import violinplot, swarmplot
 from sklearn.metrics import cohen_kappa_score
 from matplotlib.pylab import figure
-
+from scipy import stats
 
 def cohen_kappa(merge_df, plot_option, title):
     '''
@@ -48,3 +48,9 @@ def cohen_kappa(merge_df, plot_option, title):
     else:
 
         return agg_Cohen
+    
+def t_test(data):
+    stat = data.groupby(['Exposures', 'Modality'])['Cohen_Kappa'].agg({'Stats': lambda x: stats.ttest_1samp(x, 0)[0],
+                                                                        'p-value': lambda x: stats.ttest_1samp(x, 0)[1]})
+    
+    return stat

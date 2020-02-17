@@ -81,5 +81,34 @@ def merge_export(r_aud_1, r_aud_2, r_vis_1, r_vis_2,
     
     else:
         return merge
+
+def to_DataFrame_autoenconder(data, classe, CHANNEL_NAMES):
+    '''
+    TO-DO
     
+    '''
+    x_array = DataArray(data)
+    x_array = x_array.rename({'dim_0': 'people','dim_1': 'channel','dim_2':'time','dim_3':'trial'})
+    x_array = x_array.transpose('people', 'trial', 'channel','time')
+    x_array.to_dataframe('channel').unstack()
+
+    df = x_array.to_dataframe('time').unstack()
+
+    df_classe =  DataFrame(classe.stack()).reset_index()
+    df_classe.columns = ['people','trial','group']
+    df_v = df_classe.merge(df,on=['people','trial'], validate='one_to_many',how='outer')
+    df_v['channel'] = df.reset_index()['channel']
+
+    df_v['channel'].replace(dict(zip(list(range(64)),CHANNEL_NAMES)), inplace=True)
+
+    time_legend = ['time '+str(i) for i in range(32)]
+
+    df_v.columns = ['people',  'trial', 'group']+time_legend+['channel']
+
+    df_v = df_v[['people',  'trial', 'group','channel']+time_legend]
+
+    df_v = df_v[~((df_v['channel'] =='HEOG') | (df_v['channel'] =='VEOG'))]
+
+
+    return df_v
     
