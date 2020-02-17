@@ -28,6 +28,7 @@ def cohen_kappa(merge_df, plot_option, title):
         'id_person', 'Exposures', 'Modality', 'Cohen_Kappa'])
 
     if (plot_option):
+        s
         fig = figure()
         ax = violinplot(x="Exposures", y="Cohen_Kappa", hue="Modality",
                         data=agg_Cohen, palette=['#de0000', '#001a8d'])
