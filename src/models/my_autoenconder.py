@@ -40,7 +40,7 @@ class my_autoenconder(object):
         original_trial = Input(shape=(62))
         enconded = Dense(62, activation='relu')(original_trial)
         enconded = Dense(32, activation='relu')(enconded)
-        enconded = Dense(16, activation='relu')(enconded)
+        
 
         if (self.regularizer != []):
             enconded = Dense(self.value_encoding_dim,
@@ -51,8 +51,8 @@ class my_autoenconder(object):
             enconded = Dense(self.value_encoding_dim,
                              activation='relu')(enconded)
 
-        deconded = Dense(16, activation='relu', use_bias=False)(enconded)
-        deconded = Dense(32, activation='relu', use_bias=False)(deconded)
+
+        deconded = Dense(32, activation='relu', use_bias=False)(enconded)
         deconded = Dense(62, activation='relu', use_bias=False)(deconded)
 
         encoder = Model(original_trial, enconded, name='encoder')
@@ -66,15 +66,9 @@ class my_autoenconder(object):
 
     def fit(self, X):
 
- 
-        # Splitting for validation
-        X_train, X_validation = train_test_split(X.T,
-            test_size=self.test_size,
-            random_state=self.random_state)
-
         #import pdb; pdb.set_trace()
-        X_train = X_train.to_numpy()
-        X_validation = X_validation.to_numpy()
+        X_train = X.T.to_numpy()
+        X_validation = X_train.copy()
 
         # Training auto-enconder
         self.history = self.method_autoenconder.fit(X_train, X_train,
