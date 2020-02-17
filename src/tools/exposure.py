@@ -6,6 +6,7 @@ from pandas import DataFrame
 from numpy import array, divide, average
 from os import listdir
 from os.path import isfile, join
+import doctest
 
 N_TRIALS = 120
 
@@ -212,4 +213,4 @@ def get_group_time(time_s2_aud, time_s2_vis):
     classes_aud = DataFrame(classes_aud).T
     
     return classes_aud, classes_vis
-
+doctest.testmod(verbose=True)
