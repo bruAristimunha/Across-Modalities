@@ -4,7 +4,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras import losses
 from sklearn.model_selection import train_test_split
 
-class my_autoenconder(object):
+class AutoEnconder(object):
 
     def __init__(self, epochs=10, batch_size=32, validation_size=0.2,
                  random_state=42, regularizer = [],
