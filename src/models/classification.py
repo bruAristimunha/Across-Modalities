@@ -3,7 +3,7 @@ from tqdm.autonotebook import tqdm
 from numpy import average, subtract
 from sklearn.naive_bayes import GaussianNB
 from sklearn.decomposition import PCA
-
+from pandas import DataFrame, concat
 
 def classification_within_modality(dataFrame, categoria, exposure):
     '''
