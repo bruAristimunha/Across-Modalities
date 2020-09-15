@@ -35,13 +35,13 @@ class AutoEnconder(object):
 
         self.value_encoding_dim = value_encoding_dim
         
-        fun_loss = losses.mean_absolute_error
+        fun_loss = losses.mean_absolute_percentage_error
 
         original_trial = Input(shape=(62))
         enconded = Dense(62, activation='relu')(original_trial)
         enconded = Dense(32, activation='relu')(enconded)
-        
-
+        enconded = Dense(16, activation='relu')(enconded)
+        enconded = Dense(8, activation='relu')(enconded)
         if (self.regularizer != []):
             enconded = Dense(self.value_encoding_dim,
                              activation='relu',
@@ -51,8 +51,9 @@ class AutoEnconder(object):
             enconded = Dense(self.value_encoding_dim,
                              activation='relu')(enconded)
 
-
-        deconded = Dense(32, activation='relu', use_bias=False)(enconded)
+        deconded = Dense(8, activation='relu', use_bias=False)(enconded)
+        deconded = Dense(16, activation='relu', use_bias=False)(deconded)
+        deconded = Dense(32, activation='relu', use_bias=False)(deconded)
         deconded = Dense(62, activation='relu', use_bias=False)(deconded)
 
         encoder = Model(original_trial, enconded, name='encoder')
