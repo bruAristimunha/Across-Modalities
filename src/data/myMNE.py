@@ -39,7 +39,8 @@ def makeMNE(file_name: str) -> mne.epochs.EpochsArray:
                               proj = True,
                           verbose  = False)
     
-    epochs.set_montage(mne.channels.read_montage(kind='biosemi64'))
+    #import pdb;pdb.set_trace()
+    #epochs.set_montage('biosemi64')
 
 
     return epochs
