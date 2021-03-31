@@ -51,7 +51,7 @@ keras-model-specs==1.2.0
 Keras-Preprocessing==1.1.0
 keras-utils==1.0.13
 kiwisolver==1.1.0
-lxml==4.4.1
+lxml==4.6.3
 Markdown==3.1.1
 MarkupSafe==1.1.1
 matplotlib==3.1.1
